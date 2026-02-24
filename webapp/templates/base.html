@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Machine Learning{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{{ url_for('index') }}" class="logo">
+                <span class="logo-icon">ML</span>
+                <span class="logo-text">Machine Learning</span>
+            </a>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
+                    Accueil
+                </a>
+                <a href="{{ url_for('webapp') }}" class="nav-link {% if request.endpoint == 'webapp' %}active{% endif %}">
+                    Data Input
+                </a>
+                <a href="{{ url_for('result') }}" class="nav-link {% if request.endpoint == 'result' %}active{% endif %}">
+                    Results
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Machien Learning Platform</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Data Input{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Machine Learning</h1>
+<p class="page-subtitle">Machine Learning Project - Data Input</p>
+
+<div class="grid grid-2">
+    <!-- Upload Section -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Import des donnees</h2>
+            <span class="card-subtitle">Format CSV</span>
+        </div>
+
+        <div class="upload-zone" id="upload-zone">
+            <div class="upload-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17,8 12,3 7,8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+            </div>
+            <p class="upload-text">Glissez votre fichier CSV ici</p>
+            <p class="upload-hint">ou cliquez pour selectionner</p>
+            <input type="file" id="file-input" accept=".csv" style="display: none;">
+        </div>
+
+        <div class="alert alert-info mt-2">
+            <strong>Format attendu:</strong><br>
+            attack.csv, probleme.csv...
+        </div>
+
+        <button class="btn btn-secondary mt-2" style="width: 100%;">
+            Load data
+        </button>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/webapp.js') }}"></script>
+${% endblock %}
