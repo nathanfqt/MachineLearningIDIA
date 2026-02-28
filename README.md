@@ -2,7 +2,7 @@
 
 This project presents a complete pipeline for cyber attack classification using Machine Learning, along with a Flask web application for inference.
 
-The goal is to predict the type of cyber attack (**Intrusion**, **Malware**, or **DDoS**) from structured input data and provide a simple web interface to upload an XML file and display the prediction.
+The goal is to predict the type of cyber attack (**Intrusion**, **Malware**, or **DDoS**) from structured input data and provide a simple web interface to upload an CSV file and display the prediction.
 
 ---
 
@@ -11,7 +11,7 @@ The goal is to predict the type of cyber attack (**Intrusion**, **Malware**, or 
 - Machine Learning model for multi-class cyber attack classification
 - Feature engineering and exploratory analysis in Jupyter notebooks
 - Flask web application for model inference
-- Drag & drop XML upload interface
+- Drag & drop CSV upload interface
 - Prediction result displayed on a dedicated results page
 
 ---
@@ -37,7 +37,7 @@ python webapp/app.py
 ## Usage
 
 - Open the web interface
-- Drag & drop an XML file into the upload area
+- Drag & drop a CSV file into the upload area
 - Submit the file
 - The application displays the predicted attack type
 
