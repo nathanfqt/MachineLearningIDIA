@@ -7,37 +7,82 @@
 <p class="page-subtitle">Machine Learning Project - Data Input</p>
 
 <div class="grid grid-2">
-    <!-- Upload Section -->
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">Import des donnees</h2>
-            <span class="card-subtitle">Format CSV</span>
-        </div>
-
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Data Input</h2>
+      <span class="card-subtitle">CSV Format</span>
+    </div>
+    <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
         <div class="upload-zone" id="upload-zone">
             <div class="upload-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="17,8 12,3 7,8"/>
-                    <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17,8 12,3 7,8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
             </div>
-            <p class="upload-text">Glissez votre fichier CSV ici</p>
-            <p class="upload-hint">ou cliquez pour selectionner</p>
-            <input type="file" id="file-input" accept=".csv" style="display: none;">
+            <p class="upload-text" id="upload-text">Drag & Drop your CSV file here</p>
+            <p class="upload-hint">Or click to select</p>
+            <input
+            type="file"
+            id="file-input"
+            name="file"
+            accept=".csv"
+            style="display: none;"
+            required
+            >
         </div>
 
         <div class="alert alert-info mt-2">
-            <strong>Format attendu:</strong><br>
-            attack.csv, probleme.csv...
+            <strong>Please download this template and fill it with your data before running the analysis</strong><br>
+            <a href="{{ url_for('static', filename='templates/template_data.csv') }}"
+                download
+                class="btn btn-outline-secondary mt-2">
+                Download CSV template
+            </a>
         </div>
 
-        <button class="btn btn-secondary mt-2" style="width: 100%;">
-            Load data
+        <button type="submit" class="btn btn-secondary mt-2" style="width: 100%;">
+            Analyze
         </button>
-    </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/webapp.js') }}"></script>
-${% endblock %}
+
+<script>
+  const uploadZone = document.getElementById("upload-zone");
+  const fileInput = document.getElementById("file-input");
+  const uploadText = document.getElementById("upload-text");
+
+  uploadZone.addEventListener("click", () => fileInput.click());
+
+  uploadZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    uploadZone.classList.add("dragover");
+  });
+
+  uploadZone.addEventListener("dragleave", () => {
+    uploadZone.classList.remove("dragover");
+  });
+
+  uploadZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove("dragover");
+
+    if (e.dataTransfer.files.length > 0) {
+      fileInput.files = e.dataTransfer.files;
+      uploadText.textContent = e.dataTransfer.files[0].name;
+    }
+  });
+
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files.length > 0) {
+      uploadText.textContent = fileInput.files[0].name;
+    }
+  });
+</script>
+{% endblock %}

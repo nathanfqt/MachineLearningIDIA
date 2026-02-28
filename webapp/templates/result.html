@@ -4,9 +4,11 @@
 
 {% block content %}
 <section class="hero">
-    <h1 class="hero-title">Machine Learning Platform</h1>
-    <p class="hero-subtitle">
-        Plateform used to simulate and predict Cyber-Security attacks results
-    </p>
+    <h1 class="hero-title">Machine Learning Platform Result</h1>
+    {% if error %}
+        <h2 style="color: red;">{{ error }}</h2>
+    {% else %}
+        <h2>It seems that the Cyber Attack is : <strong>{{ prediction }}</strong></h2>
+    {% endif %}
 </section>
 {% endblock %}
